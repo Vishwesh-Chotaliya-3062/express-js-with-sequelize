@@ -34,6 +34,8 @@ require("./app/routes/alluserList.routes")(app);
 require("./app/routes/listByUserName.routes")(app);
 require("./app/routes/listByStateName.routes")(app);
 require("./app/routes/exportToCSV.routes")(app);
+require("./app/routes/userAuthentication.router")(app);
+require("./app/routes/userAuthorization.router")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

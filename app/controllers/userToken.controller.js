@@ -7,7 +7,8 @@ const { vehicle } = require("../models");
 // Retrieve a selected info of single User with an username
 
 exports.findAll = (req, res) => {
-  const UserName = req.params.UserName;
+    
+
 
   VehicleRegistration.belongsTo(vehicle, {
     targetKey: "VehicleID",
