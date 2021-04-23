@@ -41,7 +41,7 @@ exports.generateCSV = async (req, res, next) => {
     );
     const csv = json2csvParser.parse(data);
     fs.writeFile(
-      `../express-js-with-sequelize/app/ExportToCSV.csv`,
+      `../express-js-with-sequelize/ExportToCSV/ExportToCSV.csv`,
       csv,
       (error) => {
         if (error) {
