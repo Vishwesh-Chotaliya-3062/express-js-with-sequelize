@@ -1,5 +1,6 @@
 const dbConfig = require("../config/db.config.js");
 const Json2csvParser = require("json2csv").Parser;
+const json2csvParser = new Json2csvParser({ header: true });
 const fs = require("fs");
 
 const Sequelize = require("sequelize");
@@ -15,8 +16,6 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle,
   },
 });
-
-const json2csvParser = new Json2csvParser({ header: true });
 
 exports.generateCSV = async (req, res, next) => {
   try {
@@ -39,9 +38,10 @@ exports.generateCSV = async (req, res, next) => {
         type: sequelize.QueryTypes.SELECT,
       }
     );
+    
     const csv = json2csvParser.parse(data);
     fs.writeFile(
-      `../express-js-with-sequelize/ExportToCSV/ExportToCSV.csv`,
+      `../express-js-with-sequelize/Export To CSV/ExportToCSV.csv`,
       csv,
       (error) => {
         if (error) {
