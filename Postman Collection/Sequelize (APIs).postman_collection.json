@@ -42,7 +42,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/listByUserName/Vimarsh",
+					"raw": "localhost:8080/api/listByUserName/Vishwesh",
 					"host": [
 						"localhost"
 					],
@@ -50,7 +50,7 @@
 					"path": [
 						"api",
 						"listByUserName",
-						"Vimarsh"
+						"Vishwesh"
 					]
 				}
 			},
@@ -150,7 +150,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlZpc2h3ZXNoIiwiaWF0IjoxNjE5MTkwMTMxfQ.qoh2Zlkmw871hlQrIa2ZgrFdi0yBzWEnv06N-XW4T24",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlZpc2h3ZXNoIiwiaWF0IjoxNjE5NTA2Mjc2fQ.BEAosGkMxTL6ho7vW86k-cYECM64puIMG2_6JNq6wn4",
 							"type": "string"
 						}
 					]
@@ -173,6 +173,34 @@
 					"path": [
 						"api",
 						"protected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"UserName\":\"Kathan\",\r\n    \"Email\":\"ktm@gmail.com\",\r\n    \"Password\":\"ktm123\",\r\n    \"Status\":false,\r\n    \"StateID\":4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user"
 					]
 				}
 			},
