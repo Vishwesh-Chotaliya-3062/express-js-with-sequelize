@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
   VehicleRegistration.hasMany(User, {
     foreignKey: "UserID",
   });
-  
+
   User.findAll({
     attributes: ["UserID", "UserName"],
     where: {

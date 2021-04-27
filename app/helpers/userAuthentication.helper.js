@@ -10,6 +10,7 @@ const passportJWT = require("passport-jwt");
 
 let ExtractJwt = passportJWT.ExtractJwt;
 let JwtStrategy = passportJWT.Strategy;
+const bcrypt = require("bcryptjs");
 
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -31,12 +32,8 @@ let strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
 passport.use(strategy);
 
 const app = express();
-// initialize passport with express
 app.use(passport.initialize());
-
-// parse application/json
 app.use(bodyParser.json());
-//parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const Sequelize = require("sequelize");
@@ -62,21 +59,28 @@ const getUser = async (obj) => {
 };
 
 exports.userAuthentication = async function (req, res, next) {
-  const { name, password } = req.body;
-  if (name && password) {
-    let user = await getUser({ UserName: name });
+  const { UserName, Password } = req.body;
+  if (UserName && Password) {
+    let user = await getUser({ UserName: UserName });
     if (!user) {
       res.status(401).json({ message: "No such user found" });
     }
-    if (user.Password === password) {
-      // from now on we'll identify the user by the id and the id is the
-      // only personalized value that goes into our token
-      let payload = { id: user.UserID, name: user.UserName };
-      let token = jwt.sign(payload, jwtOptions.secretOrKey);
-      res.json({ msg: "ok", token: token });
-    } else {
-      res.status(401).json({ msg: "Password is incorrect" });
-    }
+
+    bcrypt.compare(req.body.Password, user.Password, function (err, isMatch) {
+      if (err) {
+        throw err;
+      } else if (!isMatch) {
+        res.json({ msg: "Password doest not match" });
+      } else {
+        let payload = { id: user.UserID, name: user.UserName };
+        let token = jwt.sign(payload, jwtOptions.secretOrKey);
+        res.json({
+          msg: "Hello there, This is your Authentication Token",
+          token: token,
+        });
+      }
+    });
+  } else {
+    res.status(401).json({ message: "Enter UserName and Password" });
   }
 };
-

@@ -1,6 +1,8 @@
 const db = require("../models");
 const User = db.user;
 const Op = db.Sequelize.Op;
+const bcrypt = require("bcryptjs");
+const saltRounds = 10;
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -28,15 +30,51 @@ exports.create = (req, res) => {
     Status: req.body.Status,
   };
 
-  // Save User in the database
-  User.create(user)
+  User.findOne({
+    where: {
+      Email: req.body.Email,
+    },
+  })
     .then((data) => {
-      res.send(data);
+      if (!data) {
+        bcrypt.genSalt(saltRounds, function (err, salt) {
+          if (err) {
+            throw err;
+          } else {
+            bcrypt.hash(req.body.Password, salt, function (err, hash) {
+              if (err) {
+                throw err;
+              } else {
+                user.Password = hash;
+                User.create(user)
+                  .then((data) => {
+                    res.json({
+                      UserID: data.UserID,
+                      UserName: data.UserName,
+                      Email: data.Email,
+                      StateID: data.StateID,
+                      Status: data.Status,
+                    });
+                  })
+                  .catch((err) => {
+                    res.json({
+                      error:
+                        "USER WITH EMAIL = " + user.Email + " ALREADY EXISTS",
+                    });
+                  });
+              }
+            });
+          }
+        });
+      } else {
+        res.json({
+          error:
+            "USER WITH USERNAME = " + user.UserName + " ALREADY EXISTS",
+        });
+      }
     })
     .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the User.",
-      });
+      res.send("ERROR: " + err);
     });
 };
 
@@ -53,6 +91,7 @@ exports.findAll = (req, res) => {
 
   User.findAll({
     where: condition,
+    attributes: ["UserID", "UserName", "Email", "StateID", "Status"],
   })
     .then((data) => {
       res.send(data);

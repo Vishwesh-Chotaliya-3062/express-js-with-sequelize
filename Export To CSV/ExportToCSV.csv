@@ -1,4 +1,4 @@
 "UserName","Status","Email","VehicleID","VehicleName","RegistrationDate","ExpiryDate"
-"Vishwesh",1,"hello@gmail.com",3,"Sp125","2019-02-20","2021-08-25"
-"Vishwesh",1,"hello@gmail.com",4,"Hero","2020-02-28","2021-09-23"
-"Vimarsh",1,"vim@gmail.com",2,"swift","2021-01-15","2023-08-31"
+"Vimarsh",1,"vim@gmail.com",1,"Sp125","20222","2021"
+"Vimarsh",1,"vim@gmail.com",2,"Honda","2020","2021"
+"Sidhhesh",1,"sid@gmail.com",,,,

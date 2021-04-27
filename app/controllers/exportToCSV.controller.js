@@ -28,17 +28,17 @@ exports.generateCSV = async (req, res, next) => {
       vehicle.VehicleName,
       vehicleregistration.RegistrationDate,
       vehicleregistration.ExpiryDate
-    FROM user
-    JOIN vehicleregistration
-      ON vehicleregistration.UserID = user.UserID
-    JOIN vehicle
+      FROM user
+      LEFT OUTER JOIN vehicleregistration
+      ON user.UserID = vehicleregistration.UserID
+      LEFT OUTER JOIN vehicle
       ON vehicleregistration.VehicleID = vehicle.VehicleID
       where user.Status  = 1`,
       {
         type: sequelize.QueryTypes.SELECT,
       }
     );
-    
+
     const csv = json2csvParser.parse(data);
     fs.writeFile(
       `../express-js-with-sequelize/Export To CSV/ExportToCSV.csv`,
@@ -47,9 +47,7 @@ exports.generateCSV = async (req, res, next) => {
         if (error) {
           return res.status(500).json(error.message);
         } else {
-          return res
-            .status(200)
-            .json(`JSON file Exported as CSV Successfully`);
+          return res.status(200).json(`JSON file Exported as CSV Successfully`);
         }
       }
     );

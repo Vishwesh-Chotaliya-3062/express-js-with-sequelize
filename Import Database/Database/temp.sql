@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2021 at 02:01 PM
+-- Generation Time: Apr 27, 2021 at 03:32 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -119,10 +119,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UserID`, `UserName`, `Email`, `Password`, `StateID`, `Status`) VALUES
-(1, 'Vishwesh', 'hello@gmail.com', 'vish123', 6, 1),
-(2, 'Sidhhesh', 'sid@gmail.com', 'sid123', 15, 0),
-(3, 'Vimarsh', 'vim@gmail.com', 'vim123', 52, 1),
-(4, 'Temp', 'temp@gmail.com', 'tmp123', 9, 0);
+(1, 'Vishwesh', 'vish@gmail.com', '$2a$10$nviV49wv8QpYCab5lWPSdebch6boOZT0WWfIjxftd4IohgkwlSGPa', 4, 0),
+(2, 'Sidhhesh', 'sid@gmail.com', '$2a$10$JsvVECJJgMuuqFfnNBOkAer7aXZtEeuZsoJkxlXIbymNQTgttrtJC', 10, 1),
+(3, 'Vimarsh', 'vim@gmail.com', '$2a$10$U4USKWbNTal7yVkB8/QuMOErGyqVmaievQ0o5ITqRLoYuvmcpKloa', 35, 1),
+(4, 'Kathan', 'ktm@gmail.com', '$2a$10$jntxfxxYtw8X0.5tjyhkT..tRNuxnyO56jGmxA/tuIajnSUWlAJdy', 4, 0),
+(5, 'V1imarsh', 'v1im@gmail.com', '$2a$10$SiEJ3SD26j0O7Wd9buZH5.cQSWbQEqSad99iBCqkIEMBHKPobJEKu', 35, 1);
 
 -- --------------------------------------------------------
 
@@ -141,11 +142,9 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`VehicleID`, `VehicleName`, `VehicleType`) VALUES
-(1, 'i20', 'Car'),
-(2, 'swift', 'Car'),
-(3, 'Sp125', 'Bike'),
-(4, 'Hero', 'Bicycle'),
-(5, 'Activa 5G', 'Gearless Vehicle');
+(1, 'Sp125', 'Bike'),
+(2, 'Honda', 'Car'),
+(3, 'Activa', '2 Wheeler');
 
 -- --------------------------------------------------------
 
@@ -166,11 +165,9 @@ CREATE TABLE `vehicleregistration` (
 --
 
 INSERT INTO `vehicleregistration` (`VehicleRegistrationID`, `UserID`, `VehicleID`, `RegistrationDate`, `ExpiryDate`) VALUES
-(1, 1, 3, '2019-02-20', '2021-08-25'),
-(2, 1, 4, '2020-02-28', '2021-09-23'),
-(3, 3, 2, '2021-01-15', '2023-08-31'),
-(4, 4, 5, '2017-08-29', '2023-12-22'),
-(5, 2, 2, '2019-02-20', '2021-08-25');
+(1, 1, 2, '2020', '2021'),
+(2, 3, 1, '20222', '2021'),
+(3, 3, 2, '2020', '2021');
 
 --
 -- Indexes for dumped tables
@@ -219,19 +216,19 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262224;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `VehicleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `VehicleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `vehicleregistration`
 --
 ALTER TABLE `vehicleregistration`
-  MODIFY `VehicleRegistrationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `VehicleRegistrationID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
