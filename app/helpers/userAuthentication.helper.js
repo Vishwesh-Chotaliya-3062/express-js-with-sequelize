@@ -17,9 +17,9 @@ jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = "mysecretkey";
 
 // lets create our strategy for web token
-let strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
+let strategy = new JwtStrategy(jwtOptions, async function (jwt_payload, next) {
   console.log("payload received", jwt_payload);
-  let user = getUser({ UserID: jwt_payload.id });
+  let user = await getUser({ UserID: jwt_payload.id });
 
   if (user) {
     next(null, user);
@@ -73,7 +73,7 @@ exports.userAuthentication = async function (req, res, next) {
         res.json({ msg: "Password doest not match" });
       } else {
         let payload = { id: user.UserID, name: user.UserName };
-        let token = jwt.sign(payload, jwtOptions.secretOrKey);
+        let token = jwt.sign(payload, jwtOptions.secretOrKey, {expiresIn:10000});
         res.json({
           msg: "Hello there, This is your Authentication Token",
           token: token,
